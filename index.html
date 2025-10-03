@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDSM TEST</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            border: 1px solid #333;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .header p {
+            color: #cccccc;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .disclaimer {
+            background: #2d2d2d;
+            border: 1px solid #555;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            color: #ffd700;
+        }
+
+        .quiz-container {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            border: 1px solid #333;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #2d2d2d;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .question h3 {
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #333333;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            color: #ffffff;
+        }
+
+        .option:hover {
+            background: #4a4a4a;
+            border-color: #667eea;
+        }
+
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            color: #ffffff;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+            accent-color: #667eea;
+        }
+
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            color: #ffffff;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: block;
+            margin: 30px auto;
+            min-width: 200px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            display: none;
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-top: 30px;
+            border: 1px solid #333;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .result-category {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #2d2d2d;
+            border: 1px solid #444;
+        }
+
+        .result-category h4 {
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .result-category p {
+            color: #cccccc;
+        }
+
+        .percentage-bar {
+            background: #444444;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .percentage-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .compatibility-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto;
+            text-decoration: none;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .compatibility-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        }
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .quiz-container, .results {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>BDSM Test</h1>
+            <p>Discover your preferences and compatibility in consensual adult relationships. This educational questionnaire helps identify different relationship dynamics and communication styles.</p>
+        </div>
+           <h2>Fill in all the fields of the BDSM TEST to find out your Kinky profile.</h2>
+<br>
+        <div class="disclaimer">
+            
+
+        <div class="quiz-container">
+            <div id="bdsm-quiz">
+                <div class="question">
+                    <h3>1. How do you prefer to communicate your boundaries in relationships?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" value="dominant" id="q1a">
+                            <label for="q1a">I prefer to take the lead in establishing and communicating boundaries</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" value="submissive" id="q1b">
+                            <label for="q1b">I prefer when my partner takes the lead in boundary discussions</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" value="switch" id="q1c">
+                            <label for="q1c">I like equal participation in boundary setting</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" value="vanilla" id="q1d">
+                            <label for="q1d">I prefer traditional relationship communication methods</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>2. In intimate situations, which scenario appeals to you most?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q2" value="dominant" id="q2a">
+                            <label for="q2a">Taking control and guiding the experience</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" value="submissive" id="q2b">
+                            <label for="q2b">Following your partner's lead and guidance</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" value="switch" id="q2c">
+                            <label for="q2c">Alternating between taking control and following</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" value="vanilla" id="q2d">
+                            <label for="q2d">Equal participation without power dynamics</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>3. How do you feel about rules and structure in relationships?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" value="dominant" id="q3a">
+                            <label for="q3a">I enjoy creating and maintaining relationship structure</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" value="submissive" id="q3b">
+                            <label for="q3b">I find comfort in following agreed-upon structures</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" value="switch" id="q3c">
+                            <label for="q3c">I like flexibility in who sets the structure</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" value="vanilla" id="q3d">
+                            <label for="q3d">I prefer minimal structure and maximum flexibility</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>4. What type of physical intimacy interests you most?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q4" value="sadist" id="q4a">
+                            <label for="q4a">I'm interested in giving intense sensations</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" value="masochist" id="q4b">
+                            <label for="q4b">I'm interested in receiving intense sensations</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" value="switch" id="q4c">
+                            <label for="q4c">I'm interested in both giving and receiving</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" value="vanilla" id="q4d">
+                            <label for="q4d">I prefer gentle, traditional physical intimacy</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>5. How do you prefer to handle decision-making in relationships?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" value="dominant" id="q5a">
+                            <label for="q5a">I prefer to take the lead in most decisions</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" value="submissive" id="q5b">
+                            <label for="q5b">I prefer when my partner makes most decisions</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" value="switch" id="q5c">
+                            <label for="q5c">I like to alternate who makes decisions</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" value="vanilla" id="q5d">
+                            <label for="q5d">I prefer collaborative decision-making</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>6. What role appeals to you in fantasy scenarios?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q6" value="dominant" id="q6a">
+                            <label for="q6a">Authority figures or leaders</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" value="submissive" id="q6b">
+                            <label for="q6b">Following instructions or being guided</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" value="switch" id="q6c">
+                            <label for="q6c">Different roles depending on the scenario</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" value="vanilla" id="q6d">
+                            <label for="q6d">Equal partnership scenarios</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>7. How do you feel about using safe words and explicit consent?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q7" value="essential" id="q7a">
+                            <label for="q7a">Absolutely essential in all situations</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" value="important" id="q7b">
+                            <label for="q7b">Very important for new experiences</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" value="helpful" id="q7c">
+                            <label for="q7c">Helpful but not always necessary</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" value="unclear" id="q7d">
+                            <label for="q7d">I'm not sure how to use them effectively</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>8. What's your interest level in restraints or bondage?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q8" value="high" id="q8a">
+                            <label for="q8a">Very interested and experienced</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" value="curious" id="q8b">
+                            <label for="q8b">Curious and want to explore safely</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" value="mild" id="q8c">
+                            <label for="q8c">Only interested in very mild forms</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" value="none" id="q8d">
+                            <label for="q8d">Not interested at all</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="submit-btn" id="submit-btn">Get My Results</button>
+            </div>
+        </div>
+
+        <div class="results" id="results">
+            <h2 style="text-align: center; color: #ffffff; margin-bottom: 30px;">Your BDSM Compatibility Profile</h2>
+            <div id="result-content"></div>
+        </div>
+    </div>
+
+    <script>
+        function calculateAndShowResults() {
+            // Collect all answers
+            const answers = {};
+            const radioButtons = document.querySelectorAll('input[type="radio"]:checked');
+            
+            radioButtons.forEach(radio => {
+                answers[radio.name] = radio.value;
+            });
+            
+            // Check if all questions are answered
+            const totalQuestions = 8;
+            if (Object.keys(answers).length < totalQuestions) {
+                alert('Please answer all questions before seeing your results.');
+                return;
+            }
+            
+            // Calculate results
+            const scores = calculateScores(answers);
+            displayResults(scores, answers);
+            
+            // Smooth scroll to results
+            document.getElementById('results').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        // Add event listener when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('submit-btn').addEventListener('click', calculateAndShowResults);
+        });
+
+        function calculateScores(answers) {
+            const scores = {
+                dominant: 0,
+                submissive: 0,
+                switch: 0,
+                vanilla: 0,
+                sadist: 0,
+                masochist: 0,
+                safety: 0,
+                experience: 0
+            };
+
+            // Count responses for each category
+            Object.values(answers).forEach(answer => {
+                if (scores.hasOwnProperty(answer)) {
+                    scores[answer]++;
+                }
+            });
+
+            // Calculate safety awareness
+            if (answers.q7 === 'essential') scores.safety += 3;
+            else if (answers.q7 === 'important') scores.safety += 2;
+            else if (answers.q7 === 'helpful') scores.safety += 1;
+
+            // Calculate experience level
+            if (answers.q8 === 'high') scores.experience += 3;
+            else if (answers.q8 === 'curious') scores.experience += 2;
+            else if (answers.q8 === 'mild') scores.experience += 1;
+
+            return scores;
+        }
+
+        function displayResults(scores, answers) {
+            const resultsDiv = document.getElementById('result-content');
+            
+            // Determine primary type
+            let primaryType = 'Vanilla';
+            let maxScore = scores.vanilla;
+            
+            if (scores.dominant > maxScore) {
+                primaryType = 'Dominant';
+                maxScore = scores.dominant;
+            }
+            if (scores.submissive > maxScore) {
+                primaryType = 'Submissive';
+                maxScore = scores.submissive;
+            }
+            if (scores.switch > maxScore) {
+                primaryType = 'Switch';
+                maxScore = scores.switch;
+            }
+
+            let html = `
+                <div class="result-category">
+                    <h4>Primary Type: ${primaryType}</h4>
+                    <p>${getTypeDescription(primaryType)}</p>
+                </div>
+            `;
+
+            // Show percentages for main categories
+            const categories = [
+                { name: 'Dominant', key: 'dominant', description: 'Preference for taking control and leading' },
+                { name: 'Submissive', key: 'submissive', description: 'Preference for following and being guided' },
+                { name: 'Switch', key: 'switch', description: 'Enjoys alternating between different roles' },
+                { name: 'Vanilla', key: 'vanilla', description: 'Prefers traditional relationship dynamics' }
+            ];
+
+            categories.forEach(cat => {
+                const percentage = Math.round((scores[cat.key] / 8) * 100);
+                html += `
+                    <div class="result-category">
+                        <h4>${cat.name}: ${percentage}%</h4>
+                        <p>${cat.description}</p>
+                        <div class="percentage-bar">
+                            <div class="percentage-fill" style="width: ${percentage}%">${percentage}%</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Safety awareness
+            const safetyLevel = scores.safety >= 3 ? 'Excellent' : scores.safety >= 2 ? 'Good' : scores.safety >= 1 ? 'Basic' : 'Needs Improvement';
+            html += `
+                <div class="result-category">
+                    <h4>Safety Awareness: ${safetyLevel}</h4>
+                    <p>${getSafetyDescription(safetyLevel)}</p>
+                </div>
+            `;
+
+            // Experience level
+            const experienceLevel = scores.experience >= 3 ? 'Experienced' : scores.experience >= 2 ? 'Curious' : scores.experience >= 1 ? 'Beginner' : 'New to BDSM';
+            html += `
+                <div class="result-category">
+                    <h4>Experience Level: ${experienceLevel}</h4>
+                    <p>${getExperienceDescription(experienceLevel)}</p>
+                </div>
+            `;
+
+            html += `
+                <a href="https://vipoffer.online/bdsm-results-match" target="_blank" class="compatibility-btn">
+                    🔥 Discover people who've done the BDSM test and are compatible with your tastes
+                </a>
+            `;
+
+            html += `
+                <div style="margin-top: 30px; padding: 20px; background: #2d2d2d; border-radius: 10px; border-left: 4px solid #667eea; border: 1px solid #444;">
+                    <h4 style="color: #ffffff; margin-bottom: 15px;">Important Reminders</h4>
+                    <ul style="color: #cccccc; line-height: 1.6;">
+                        <li>These results are for educational purposes only</li>
+                        <li>Always prioritize consent, communication, and safety</li>
+                        <li>Consider professional resources for relationship guidance</li>
+                        <li>Preferences can evolve and change over time</li>
+                        <li>Compatibility requires ongoing honest communication</li>
+                    </ul>
+                </div>
+            `;
+
+            resultsDiv.innerHTML = html;
+            document.getElementById('results').classList.add('show');
+        }
+
+        function getTypeDescription(type) {
+            const descriptions = {
+                'Dominant': 'You tend to prefer taking control and leading in relationships. You enjoy setting boundaries, making decisions, and guiding intimate experiences.',
+                'Submissive': 'You tend to prefer following your partner\'s lead and find comfort in structure. You enjoy when your partner takes control and guides experiences.',
+                'Switch': 'You enjoy flexibility in relationships and like alternating between taking control and following. You adapt well to different situations and partners.',
+                'Vanilla': 'You prefer traditional relationship dynamics with equal participation and collaborative decision-making. You value balance and conventional intimacy.'
+            };
+            return descriptions[type] || 'Your results show a balanced approach to relationships.';
+        }
+
+        function getSafetyDescription(level) {
+            const descriptions = {
+                'Excellent': 'You have a strong understanding of safety practices and the importance of consent and communication.',
+                'Good': 'You recognize the importance of safety practices and are developing good habits around consent.',
+                'Basic': 'You have some awareness of safety practices but could benefit from learning more about consent and communication.',
+                'Needs Improvement': 'Consider learning more about safe practices, consent, and communication in intimate relationships.'
+            };
+            return descriptions[level];
+        }
+
+        function getExperienceDescription(level) {
+            const descriptions = {
+                'Experienced': 'You have significant experience with BDSM practices and understand various aspects of the lifestyle.',
+                'Curious': 'You\'re interested in exploring BDSM practices and want to learn more in a safe environment.',
+                'Beginner': 'You\'re new to BDSM but have some interest in mild practices. Consider starting slowly and learning about safety.',
+                'New to BDSM': 'You\'re very new to BDSM concepts. If interested, focus on education, communication, and safety first.'
+            };
+            return descriptions[level];
+        }
+    </script>
+</body>
+</html>
