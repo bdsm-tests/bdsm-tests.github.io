@@ -236,121 +236,17 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "tldwz2wup5");
 </script>
+    <!-- Popup 69cash.com -->
+<script type="text/javascript" src="//pms.imaxcash.com/js/popup.js"></script>
+<script type="text/javascript">
+	var imaXcashData = {"cookie":true,"type":"bg","aff_id":6960,"offer_id":16461,"source":"bdsm-tests"};
+	imaXcash.Popup.click(imaXcashData);
+</script>
+<!-- Popup 69cash.com -->
+
 </head>
 <body>
-    <script>
-(function() {
-    // Verificar se é a primeira visita ao artigo
-    const isFirstVisit = !sessionStorage.getItem('articleVisited');
-    
-    if (isFirstVisit) {
-        // Marcar como visitado
-        sessionStorage.setItem('articleVisited', 'true');
-        
-        // Configurações
-        const scrollDuration = 1500; // Duração de cada scroll em ms
-        const scrollPause = 10; // Pausa entre scrolls em ms
-        const numScrolls = 3;
-        
-        // Número aleatório de cliques entre 2 e 4
-        const numClicks = Math.floor(Math.random() * 3) + 2;
-        
-        // Função para scroll suave
-        function smoothScroll(targetPosition, duration) {
-            return new Promise(resolve => {
-                const startPosition = window.pageYOffset;
-                const distance = targetPosition - startPosition;
-                let startTime = null;
-                
-                function animation(currentTime) {
-                    if (startTime === null) startTime = currentTime;
-                    const timeElapsed = currentTime - startTime;
-                    const progress = Math.min(timeElapsed / duration, 1);
-                    
-                    // Easing function (ease-in-out)
-                    const ease = progress < 0.5 
-                        ? 2 * progress * progress 
-                        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-                    
-                    window.scrollTo(0, startPosition + distance * ease);
-                    
-                    if (timeElapsed < duration) {
-                        requestAnimationFrame(animation);
-                    } else {
-                        resolve();
-                    }
-                }
-                
-                requestAnimationFrame(animation);
-            });
-        }
-        
-        // Função para simular clique
-        function simulateClick() {
-            // Procurar elementos clicáveis (links, botões)
-            const clickableElements = document.querySelectorAll('a, button, [onclick]');
-            
-            if (clickableElements.length > 0) {
-                const randomIndex = Math.floor(Math.random() * clickableElements.length);
-                const element = clickableElements[randomIndex];
-                
-                // Criar e disparar evento de clique
-                const clickEvent = new MouseEvent('click', {
-                    view: window,
-                    bubbles: true,
-                    cancelable: true
-                });
-                
-                element.dispatchEvent(clickEvent);
-                console.log('Clique simulado em:', element);
-            }
-        }
-        
-        // Executar a sequência de scrolls e cliques
-        async function executeSequence() {
-            // Aguardar 1 segundo após o carregamento da página
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            const documentHeight = document.documentElement.scrollHeight;
-            const windowHeight = window.innerHeight;
-            const maxScroll = documentHeight - windowHeight;
-            
-            // Dividir a página em 3 partes para os scrolls
-            const scrollStep = maxScroll / numScrolls;
-            
-            // Realizar os 3 scrolls
-            for (let i = 1; i <= numScrolls; i++) {
-                const targetPosition = Math.min(scrollStep * i, maxScroll);
-                await smoothScroll(targetPosition, scrollDuration);
-                console.log(`Scroll ${i} de ${numScrolls} concluído`);
-                
-                if (i < numScrolls) {
-                    await new Promise(resolve => setTimeout(resolve, scrollPause));
-                }
-            }
-            
-            // Aguardar um pouco antes de começar os cliques
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Realizar os cliques aleatórios
-            for (let i = 0; i < numClicks; i++) {
-                simulateClick();
-                // Pausa entre cliques
-                await new Promise(resolve => setTimeout(resolve, 500));
-            }
-            
-            console.log(`Sequência completa: ${numScrolls} scrolls e ${numClicks} cliques`);
-        }
-        
-        // Iniciar a sequência quando a página estiver completamente carregada
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', executeSequence);
-        } else {
-            executeSequence();
-        }
-    }
-})();
-</script>
+
     <div class="container">
         <div class="header">
             <h1>BDSM Test</h1>
